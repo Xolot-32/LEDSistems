@@ -1,0 +1,5 @@
+{
+  "name": "Manual Operativo Interactivo",
+  "description": "Una aplicación web interactiva que presenta el manual operativo para un sistema de control de iluminación LED, incluyendo una sección detallada para controladores WLED.",
+  "requestFramePermissions": []
+}
