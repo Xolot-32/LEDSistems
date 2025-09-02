@@ -1,6 +1,5 @@
 import React from 'react';
 import { SectionWrapper, SectionTitle, StyledList, StyledListItem } from '../ui/SectionWrapper';
-import { FeatureCard } from '../ui/FeatureCard';
 import { Alert } from '../ui/Alert';
 
 export const OperationSection: React.FC = () => (

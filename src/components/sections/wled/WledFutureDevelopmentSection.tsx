@@ -1,6 +1,5 @@
 import React from 'react';
 import { SectionWrapper, SectionTitle, StyledList, StyledListItem } from '../../ui/SectionWrapper';
-import { Alert } from '../../ui/Alert';
 
 export const WledFutureDevelopmentSection: React.FC = () => (
     <SectionWrapper title="Desarrollo Futuro y Mejoras" icon="🔮">

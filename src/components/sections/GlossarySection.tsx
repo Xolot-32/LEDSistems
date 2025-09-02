@@ -1,5 +1,5 @@
 import React from 'react';
-import { SectionWrapper, SectionTitle } from '../ui/SectionWrapper';
+import { SectionWrapper } from '../ui/SectionWrapper';
 import { FeatureCard } from '../ui/FeatureCard';
 
 export const GlossarySection: React.FC = () => (

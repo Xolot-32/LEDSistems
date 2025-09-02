@@ -1,6 +1,5 @@
 import React from 'react';
-import { SectionWrapper, SectionTitle, StyledList, StyledListItem } from '../ui/SectionWrapper';
-import { FeatureCard } from '../ui/FeatureCard';
+import { SectionWrapper, SectionTitle } from '../ui/SectionWrapper';
 import { Alert } from '../ui/Alert';
 
 const Table: React.FC<{ headers: string[]; children: React.ReactNode }> = ({ headers, children }) => (

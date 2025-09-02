@@ -1,6 +1,5 @@
 import React from 'react';
 import { SectionWrapper, SectionTitle, SubTitle, StyledList, StyledListItem } from '../../ui/SectionWrapper';
-import { Alert } from '../../ui/Alert';
 
 const Table: React.FC<{ headers: string[]; children: React.ReactNode }> = ({ headers, children }) => (
     <div className="overflow-x-auto my-6 rounded-lg border border-slate-200">
