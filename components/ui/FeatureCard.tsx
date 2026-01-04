@@ -1,3 +1,4 @@
+
 import React from 'react';
 
 interface FeatureCardProps {
@@ -7,18 +8,24 @@ interface FeatureCardProps {
 
 export const FeatureCard: React.FC<FeatureCardProps> = ({ title, children }) => {
     return (
-        <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-100/50 group relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-violet-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-            <h4 className="text-lg font-bold text-blue-600 mb-2 flex items-center gap-3">
+        <div className="relative bg-techblue/20 border border-cyan/30 p-6 transition-all duration-300 hover:border-cyan hover:bg-techblue/40 group overflow-hidden">
+            {/* Blueprint Grid Overlay */}
+            <div className="absolute inset-0 opacity-10 pointer-events-none bg-[radial-gradient(#00E5FF_1px,transparent_1px)] [background-size:10px_10px]"></div>
+            
+            <h4 className="text-lg font-bold text-cyan mb-4 flex items-center gap-3 mono uppercase tracking-tighter">
                 {title}
             </h4>
-            <div className="text-slate-600">{children}</div>
+            <div className="text-slate-400 text-sm leading-relaxed relative z-10">{children}</div>
+            
+            {/* Corner Markers inside the card */}
+            <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-thermal/50"></div>
+            <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-cyan/50"></div>
         </div>
     );
 };
 
 export const FeatureIcon: React.FC<{children: React.ReactNode}> = ({ children }) => (
-    <span className="w-8 h-8 bg-gradient-to-br from-blue-500 to-violet-500 rounded-md flex items-center justify-center text-white text-lg">
+    <span className="w-10 h-10 bg-cyan text-obsidian font-bold flex items-center justify-center text-xl shadow-[0_0_15px_rgba(0,229,255,0.4)]">
         {children}
     </span>
 );

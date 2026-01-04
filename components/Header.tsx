@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+
+import React, { useState, useEffect } from 'react';
 
 interface HeaderProps {
     onSearch: (query: string) => void;
@@ -11,16 +12,15 @@ const SystemButton: React.FC<{
     onClick: () => void;
     isActive: boolean;
     children: React.ReactNode;
-    className?: string;
-}> = ({ onClick, isActive, children, className }) => {
+}> = ({ onClick, isActive, children }) => {
     return (
         <button
             onClick={onClick}
-            className={`px-4 py-2 text-sm font-semibold rounded-full transition-colors duration-300 flex-1 ${
+            className={`px-3 py-1 text-[10px] font-bold uppercase tracking-widest rounded transition-all duration-300 flex-1 sm:flex-none ${
                 isActive
-                    ? 'bg-blue-500 text-white shadow'
-                    : 'text-slate-600 hover:bg-slate-200'
-            } ${className}`}
+                    ? 'bg-cyan text-obsidian shadow-[0_0_10px_rgba(0,229,255,0.5)]'
+                    : 'text-cyan/40 hover:text-cyan hover:bg-cyan/10 border border-cyan/10'
+            }`}
         >
             {children}
         </button>
@@ -29,6 +29,12 @@ const SystemButton: React.FC<{
 
 export const Header: React.FC<HeaderProps> = ({ onSearch, onMenuToggle, activeSystem, onSystemChange }) => {
     const [searchQuery, setSearchQuery] = useState('');
+    const [time, setTime] = useState(new Date());
+
+    useEffect(() => {
+        const timer = setInterval(() => setTime(new Date()), 1000);
+        return () => clearInterval(timer);
+    }, []);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(e.target.value);
@@ -36,53 +42,68 @@ export const Header: React.FC<HeaderProps> = ({ onSearch, onMenuToggle, activeSy
     };
 
     return (
-        <header className="bg-white/95 backdrop-blur-sm shadow-md fixed w-full top-0 z-40 transition-all duration-300">
-            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex items-center justify-between h-20">
-                    {/* Logo */}
-                    <div className="flex items-center gap-4">
-                        <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-500 to-violet-500 rounded-lg flex items-center justify-center text-white text-3xl animate-bounce" style={{ animationDuration: '3s' }}>
-                            💡
+        <header className="bg-obsidian/95 backdrop-blur-md border-b-2 border-thermal/30 shadow-[0_4px_20px_rgba(0,0,0,0.8)] fixed w-full top-0 z-50">
+            <div className="max-w-screen-xl mx-auto px-4">
+                {/* Main Bar */}
+                <div className="flex items-center justify-between h-20 sm:h-24">
+                    {/* Logo & Status */}
+                    <div className="flex items-center gap-3 sm:gap-6">
+                        <div className="relative flex-shrink-0">
+                            <div className="w-10 h-10 sm:w-14 sm:h-14 border-2 border-cyan flex items-center justify-center text-cyan text-xl sm:text-3xl animate-olin">
+                                🏮
+                            </div>
+                            <div className="absolute -top-1 -right-1 w-2 h-2 sm:w-3 sm:h-3 bg-red-600 rounded-full animate-pulse"></div>
                         </div>
-                        <div>
-                             <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-violet-600 text-transparent bg-clip-text whitespace-nowrap">
-                                {activeSystem === 'led' ? 'Sistema LED' : 'Controladores WLED'}
+                        <div className="min-w-0">
+                             <h1 className="text-sm sm:text-xl font-bold text-cyan tracking-tighter uppercase leading-none truncate">
+                                {activeSystem === 'led' ? 'LED OS v2.5' : 'WLED CONTROLLER'}
                             </h1>
-                            <p className="text-sm text-slate-500">Manual Operativo v1.2</p>
+                            <div className="hidden sm:flex gap-3 mt-1 text-[10px] mono text-thermal font-bold uppercase">
+                                <span className="flex items-center gap-1">
+                                    <span className="w-2 h-2 bg-thermal animate-pulse rounded-full"></span>
+                                    REC
+                                </span>
+                                <span>{time.toLocaleTimeString()}</span>
+                            </div>
                         </div>
                     </div>
 
-                    {/* Nav Actions */}
+                    {/* Desktop Actions */}
                     <div className="flex items-center gap-2 sm:gap-4">
-                         <nav className="hidden lg:flex items-center gap-2 p-1 bg-slate-100 rounded-full">
-                            <SystemButton onClick={() => onSystemChange('led')} isActive={activeSystem === 'led'}>Sistema LED</SystemButton>
-                            <SystemButton onClick={() => onSystemChange('wled')} isActive={activeSystem === 'wled'}>Controladores WLED</SystemButton>
+                         <nav className="hidden lg:flex items-center gap-2 p-1 bg-techblue/40 border border-cyan/20 rounded-full">
+                            <SystemButton onClick={() => onSystemChange('led')} isActive={activeSystem === 'led'}>LED OS</SystemButton>
+                            <SystemButton onClick={() => onSystemChange('wled')} isActive={activeSystem === 'wled'}>WLED OS</SystemButton>
                         </nav>
+                        
                         <div className="relative hidden md:block">
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={handleSearchChange}
-                                placeholder="Buscar en el manual..."
-                                className="pl-10 pr-4 py-2 w-48 lg:w-64 border-2 border-slate-200 rounded-full transition-all duration-300 focus:w-64 lg:focus:w-80 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none"
+                                placeholder="ACCEDER..."
+                                className="bg-obsidian/50 border-b border-cyan/30 text-cyan px-4 py-2 w-32 lg:w-48 focus:w-64 focus:border-cyan focus:outline-none transition-all duration-500 mono text-xs"
                             />
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-                            </svg>
                         </div>
-                        <button onClick={onMenuToggle} className="lg:hidden p-2 rounded-md text-slate-600 hover:bg-slate-100 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+
+                        {/* Mobile Menu Toggle */}
+                        <button 
+                            onClick={onMenuToggle} 
+                            className="p-2 rounded bg-cyan/10 text-cyan border border-cyan/30 hover:bg-cyan/20 transition-colors"
+                            aria-label="Menu"
+                        >
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
                             </svg>
                         </button>
                     </div>
                 </div>
+
+                {/* Mobile System Selector (Integrated) */}
+                <div className="lg:hidden flex border-t border-cyan/10 py-2 gap-2">
+                    <SystemButton onClick={() => onSystemChange('led')} isActive={activeSystem === 'led'}>LED SYSTEM</SystemButton>
+                    <SystemButton onClick={() => onSystemChange('wled')} isActive={activeSystem === 'wled'}>WLED SYSTEM</SystemButton>
+                </div>
             </div>
-             {/* Mobile System Navigation */}
-            <nav className="lg:hidden flex items-center p-2 border-t border-slate-200 bg-slate-50 gap-2">
-                <SystemButton onClick={() => onSystemChange('led')} isActive={activeSystem === 'led'}>Sistema LED</SystemButton>
-                <SystemButton onClick={() => onSystemChange('wled')} isActive={activeSystem === 'wled'}>Controladores WLED</SystemButton>
-            </nav>
         </header>
     );
 };

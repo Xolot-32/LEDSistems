@@ -1,3 +1,4 @@
+
 import React, { useState, useCallback, useEffect } from 'react';
 import type { Section } from './types';
 import { Header } from './components/Header';
@@ -67,7 +68,7 @@ const App: React.FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsLoading(false), 1000);
+        const timer = setTimeout(() => setIsLoading(false), 1200);
         return () => clearTimeout(timer);
     }, []);
 
@@ -82,7 +83,6 @@ const App: React.FC = () => {
     const handleSectionChange = useCallback((id: string) => {
         setActiveSectionId(id);
         setSidebarOpen(false);
-        // Don't scroll to top for anchor links within the same section content, if we implement that later
         if (!id.includes('#')) {
              window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -107,27 +107,26 @@ const App: React.FC = () => {
 
     if (isLoading) {
         return (
-            <div className="fixed top-0 left-0 w-full h-full bg-gradient-to-br from-indigo-400 to-purple-500 flex justify-center items-center z-50">
-                <div className="flex gap-4">
-                    <div className="w-5 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0s' }}></div>
-                    <div className="w-5 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-                    <div className="w-5 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-                    <div className="w-5 h-5 bg-white rounded-full animate-pulse" style={{ animationDelay: '0.6s' }}></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-obsidian flex flex-col justify-center items-center z-50">
+                <div className="w-16 h-16 border-2 border-cyan border-t-thermal animate-spin rounded-full mb-6"></div>
+                <div className="mono text-cyan animate-pulse tracking-[0.3em] text-xs uppercase">
+                    CARGANDO_INTERFAZ_BORGIA
                 </div>
             </div>
         );
     }
     
     return (
-        <div className="min-h-screen text-slate-700 font-sans">
+        <div className="min-h-screen text-slate-300 font-sans selection:bg-cyan selection:text-obsidian">
             <Header 
                 onSearch={handleSearch} 
                 onMenuToggle={() => setSidebarOpen(!isSidebarOpen)}
                 activeSystem={activeSystem}
                 onSystemChange={handleSystemChange}
             />
-            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-8">
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            {/* Ajuste dinámico de padding superior para móviles vs desktop */}
+            <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 sm:pt-40 lg:pt-36 pb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12">
                     <Sidebar 
                         sections={currentSections} 
                         activeSectionId={activeSectionId}
