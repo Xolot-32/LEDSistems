@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { SectionWrapper, SectionTitle, StyledList, StyledListItem } from '../../ui/SectionWrapper';
 import { Alert } from '../../ui/Alert';
@@ -40,12 +41,12 @@ export const WledMaintenanceSection: React.FC = () => (
 
         <SectionTitle>Actualización de Firmware (OTA)</SectionTitle>
         <p>
-            WLED puede actualizarse de forma inalámbrica ("Over-The-Air"). En el menú de configuración (`Config > Security & Updates`), puede buscar nuevas versiones e instalarlas directamente desde la interfaz. Se recomienda hacer un respaldo de la configuración antes de actualizar.
+            WLED puede actualizarse de forma inalámbrica ("Over-The-Air"). En el menú de configuración (Config &gt; Security &amp; Updates), puede buscar nuevas versiones e instalarlas directamente desde la interfaz. Se recomienda hacer un respaldo de la configuración antes de actualizar.
         </p>
 
         <SectionTitle>Respaldo y Restauración</SectionTitle>
         <p>
-            En la misma sección de `Security & Updates`, puede descargar un archivo JSON con toda la configuración (presets, segmentos, etc.) y restaurarlo si es necesario. Es una buena práctica guardar un respaldo después de realizar cambios importantes.
+            En la misma sección de Config &gt; Security &amp; Updates, puede descargar un archivo JSON con toda la configuración (presets, segmentos, etc.) y restaurarlo si es necesario. Es una buena práctica guardar un respaldo después de realizar cambios importantes.
         </p>
     </SectionWrapper>
 );

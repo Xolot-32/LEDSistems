@@ -11,12 +11,6 @@ interface SidebarProps {
 
 export const Sidebar: React.FC<SidebarProps> = ({ sections, activeSectionId, onSectionChange, isOpen }) => {
     return (
-        /* 
-           CAMBIOS CLAVE:
-           1. Se eliminó h-screen en desktop (lg:h-fit)
-           2. Se eliminó overflow-y-auto en desktop para que use el scroll global
-           3. Se ajustó top-24 para alinear perfectamente con el nuevo pt-24 de App.tsx
-        */
         <aside className={`bg-obsidian/95 backdrop-blur-lg border-r border-cyan/20 p-6 shadow-2xl sticky top-24 transition-transform duration-500 ease-in-out lg:transform-none ${isOpen ? 'translate-x-0' : '-translate-x-full'} lg:translate-x-0 fixed lg:relative w-80 lg:w-auto z-30 lg:z-auto ${isOpen ? 'h-screen overflow-y-auto' : 'h-fit'} lg:h-auto lg:overflow-visible`}>
             <div className="flex items-center gap-3 mb-8 pb-4 border-b border-cyan/20">
                 <div className="w-2 h-2 bg-cyan animate-pulse rounded-full"></div>
@@ -55,9 +49,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sections, activeSectionId, onS
             </nav>
             <div className="mt-12 pt-6 border-t border-cyan/10">
                 <div className="text-[9px] mono text-cyan/30 uppercase leading-relaxed italic">
-                    >> USER_AUTH: GRANTED<br/>
-                    >> SYSTEM_READY<br/>
-                    >> TO_BE_STABLE_IS_TO_BE_DEAD
+                    {" >> "} USER_AUTH: GRANTED<br/>
+                    {" >> "} SYSTEM_READY<br/>
+                    {" >> "} TO_BE_STABLE_IS_TO_BE_DEAD
                 </div>
             </div>
         </aside>

@@ -33,7 +33,7 @@ export const SectionTitle: React.FC<{children: React.ReactNode}> = ({ children }
 );
 
 export const SubTitle: React.FC<{children: React.ReactNode}> = ({ children }) => (
-    <h4 className="text-xl font-bold text-thermal mt-8 mb-4 mono uppercase">>> {children}</h4>
+    <h4 className="text-xl font-bold text-thermal mt-8 mb-4 mono uppercase">{" >> "} {children}</h4>
 );
 
 export const StyledList: React.FC<{children: React.ReactNode, ordered?: boolean}> = ({ children, ordered = false }) => {

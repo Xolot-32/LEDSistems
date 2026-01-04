@@ -72,9 +72,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ sections, activeSectionId, onS
 
                 <div className="mt-8 pt-6 border-t border-cyan/10">
                     <div className="text-[9px] mono text-cyan/30 uppercase leading-relaxed italic">
-                        >> AUTH: GRANTED<br/>
-                        >> NODE: 0x7A1...<br/>
-                        >> SYSTEM: ONLINE
+                        {" >> "} AUTH: GRANTED<br/>
+                        {" >> "} NODE: 0x7A1...<br/>
+                        {" >> "} SYSTEM: ONLINE
                     </div>
                 </div>
             </aside>
